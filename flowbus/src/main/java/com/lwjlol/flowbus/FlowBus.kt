@@ -90,3 +90,7 @@ object FlowBus {
   message = "This is an internal FlowBus API. It is not intended for external use."
 )
 annotation class InternalFlowBusApi
+
+interface FlowEvent {
+  val sticky: Boolean
+}
