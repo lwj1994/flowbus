@@ -8,4 +8,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "FlowBus"
 include(":app")
+include(":flowbus-android")
 include(":flowbus")
