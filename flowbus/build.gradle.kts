@@ -19,6 +19,9 @@ tasks.withType(KotlinCompile::class.java).all {
 }
 
 android {
+    buildFeatures {
+        buildConfig = false
+    }
     compileSdkVersion(30)
     buildToolsVersion = "30.0.3"
 
