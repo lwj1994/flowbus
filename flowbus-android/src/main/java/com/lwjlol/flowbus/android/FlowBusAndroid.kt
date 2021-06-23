@@ -3,7 +3,6 @@ package com.lwjlol.flowbus.android
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle.State
 import androidx.lifecycle.Lifecycle.State.CREATED
-import androidx.lifecycle.Lifecycle.State.STARTED
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -39,7 +38,7 @@ import kotlinx.coroutines.launch
  * @param sticky indicate whether is sticky event
  * @param dropWhenInactive drop event when [LifecycleOwner] is inactive (<=[State.DESTROYED])
  */
-inline fun <reified T> FlowBus.observe(
+inline fun <reified T> FlowBus.observeLifecycle(
   lifecycleOwner: LifecycleOwner,
   activeState: State = CREATED,
   dropWhenInactive: Boolean = false,
@@ -47,14 +46,14 @@ inline fun <reified T> FlowBus.observe(
   crossinline block: (T) -> Unit
 ) {
   if (sticky) {
-    stickyFlow.observeInternal(lifecycleOwner, activeState, dropWhenInactive, block)
+    stickyFlow.observeLifecycle(lifecycleOwner, activeState, dropWhenInactive, block)
   } else {
-    flow.observeInternal(lifecycleOwner, activeState, dropWhenInactive, block)
+    flow.observeLifecycle(lifecycleOwner, activeState, dropWhenInactive, block)
   }
 }
 
 @InternalFlowBusApi
-inline fun <reified T> Flow<Bus?>.observeInternal(
+inline fun <reified T> Flow<Bus?>.observeLifecycle(
   lifecycleOwner: LifecycleOwner,
   activeState: State,
   dropWhenInactive: Boolean,
