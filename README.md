@@ -18,7 +18,11 @@ Add it in your root build.gradle at the end of repositories:
 	dependencies {
 	        // core
 	        implementation 'com.github.lwj1994.flowbus:flowbus:tag'
+	        implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
+
 	        // android
+	        implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+            implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha02")
 	        implementation 'com.github.lwj1994.flowbus:flowbus-android:tag'
 	}
 ```
