@@ -39,7 +39,7 @@ object FlowBus {
     }
 
     @InternalFlowBusApi
-    val flow = MutableSharedFlow<Bus?>(0, 1, BufferOverflow.DROP_LATEST)
+    val flow = MutableSharedFlow<Bus?>(0)
 
     @InternalFlowBusApi
     val stickyFlow = MutableSharedFlow<Bus?>(1)
@@ -53,7 +53,6 @@ object FlowBus {
         if (sticky) {
             stickyFlow.emit(Bus(clazz = event::class.java, event = event))
         } else {
-            flow.resetReplayCache()
             flow.emit(Bus(clazz = event::class.java, event = event))
         }
     }

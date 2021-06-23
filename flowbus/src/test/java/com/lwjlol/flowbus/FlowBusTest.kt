@@ -36,9 +36,11 @@ class FlowBusTest {
     fun stickyEvent() {
         // receive 1 cache event
         FlowBus.post(Event(1), true)
+        FlowBus.post(Event(2), true)
         receiveScope.launch {
             delay(1000)
             FlowBus.observe<Event>(sticky = true) {
+                // receive 2 3 4
                 println(it.a)
 //                assert(it.a == 3)
             }
@@ -46,6 +48,7 @@ class FlowBusTest {
         runBlocking {
             delay(2000)
             FlowBus.post(Event(3), true).join()
+            FlowBus.post(Event(4), true).join()
         }
     }
 }
