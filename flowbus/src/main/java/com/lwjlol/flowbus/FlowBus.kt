@@ -48,7 +48,6 @@ object FlowBus {
      * @param event
      * @param sticky if true, will use stickyFlow cache 1 event
      */
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun post(event: Any, sticky: Boolean = false) = busScope.launch {
         if (sticky) {
             stickyFlow.emit(Bus(clazz = event::class.java, event = event))

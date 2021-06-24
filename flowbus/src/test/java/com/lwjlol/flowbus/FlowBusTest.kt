@@ -49,6 +49,7 @@ class FlowBusTest {
             delay(2000)
             FlowBus.post(Event(3), true).join()
             FlowBus.post(Event(4), true).join()
+            FlowBus.post(Event(4), true).join()
         }
     }
 }
