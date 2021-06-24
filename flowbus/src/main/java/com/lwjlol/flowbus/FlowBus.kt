@@ -3,11 +3,14 @@ package com.lwjlol.flowbus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 /**
  * EventBus implemented by [MutableSharedFlow]
@@ -31,7 +34,7 @@ import kotlinx.coroutines.launch
  *
  */
 object FlowBus {
-    private var busScope = CoroutineScope(Dispatchers.IO)
+    private var busScope = CoroutineScope(Executors.newSingleThreadExecutor().asCoroutineDispatcher())
 
     @JvmStatic
     fun init(scope: CoroutineScope) {
@@ -79,11 +82,6 @@ object FlowBus {
                 block(bus.event as T)
             }
         }
-    }
-
-    fun clear() {
-        flow.tryEmit(null)
-        stickyFlow.tryEmit(null)
     }
 
     @InternalFlowBusApi
